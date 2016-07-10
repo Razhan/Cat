@@ -1,5 +1,6 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/holo_red_dark"
@@ -9,5 +10,12 @@
         android:id="@+id/textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <com.ef.cat.ui.widget.TransmutableView
+        android:id="@+id/tv"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        app:text_color="@color/colorAccent"/>
 
 </LinearLayout>

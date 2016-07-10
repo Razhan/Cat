@@ -3,9 +3,6 @@ package com.ran.delta.widget;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
-/**
- * Created by ranzh on 7/6/2016.
- */
 public abstract class ABaseTransformer implements ViewPager.PageTransformer {
 
     protected static final float min(float val, float min) {

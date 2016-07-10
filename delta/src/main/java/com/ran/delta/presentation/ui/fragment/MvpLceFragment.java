@@ -1,15 +1,19 @@
-package com.ran.delta.presentation.ice;
+package com.ran.delta.presentation.ui.fragment;
 
+import android.os.Bundle;
 import android.support.annotation.CallSuper;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ran.delta.R;
-import com.ran.delta.presentation.MvpActivity;
-import com.ran.delta.presentation.MvpPresenter;
+import com.ran.delta.utils.LceAnimator;
+import com.ran.delta.presentation.ui.view.MvpLceView;
+import com.ran.delta.presentation.presenter.MvpPresenter;
 
-public abstract class MvpLceActivity<CV extends View, M, V extends MvpLceView<M>, P extends MvpPresenter<V>>
-        extends MvpActivity<V, P> implements MvpLceView<M> {
+public abstract class MvpLceFragment<CV extends View, M, V extends MvpLceView<M>, P extends MvpPresenter<V>>
+        extends MvpFragment<V, P> implements MvpLceView<M> {
 
     protected View loadingView;
     protected CV contentView;
@@ -17,11 +21,12 @@ public abstract class MvpLceActivity<CV extends View, M, V extends MvpLceView<M>
 
     @CallSuper
     @Override
-    public void onContentChanged() {
-        super.onContentChanged();
-        loadingView = findViewById(R.id.loadingView);
-        contentView = (CV) findViewById(R.id.contentView);
-        errorView = (TextView) findViewById(R.id.errorView);
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        loadingView = view.findViewById(R.id.loadingView);
+        contentView = (CV) view.findViewById(R.id.contentView);
+        errorView = (TextView) view.findViewById(R.id.errorView);
 
         if (loadingView == null) {
             throw new NullPointerException(
@@ -38,7 +43,7 @@ public abstract class MvpLceActivity<CV extends View, M, V extends MvpLceView<M>
         if (errorView == null) {
             throw new NullPointerException(
                     "Error view is null! Have you specified a content view in your layout xml file?"
-                            + " You have to give your error View the id R.id.contentView");
+                            + " You have to give your error View the id R.id.errorView");
         }
 
         errorView.setOnClickListener(new View.OnClickListener() {
@@ -47,10 +52,6 @@ public abstract class MvpLceActivity<CV extends View, M, V extends MvpLceView<M>
                 onErrorViewClicked();
             }
         });
-    }
-
-    protected void onErrorViewClicked() {
-        loadData(false);
     }
 
     @Override
@@ -74,13 +75,25 @@ public abstract class MvpLceActivity<CV extends View, M, V extends MvpLceView<M>
         LceAnimator.showContent(loadingView, contentView, errorView);
     }
 
+    protected abstract String getErrorMessage(Throwable e, boolean pullToRefresh);
+
+    protected void showLightError(String msg) {
+        if (getActivity() != null) {
+            Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    protected void onErrorViewClicked() {
+        loadData(false);
+    }
+
     @Override
     public void showError(Throwable e, boolean pullToRefresh) {
 
-        String errorMsg = getErrorMessage(e);
+        String errorMsg = getErrorMessage(e, pullToRefresh);
 
         if (pullToRefresh) {
-            showMessage(errorMsg);
+            showLightError(errorMsg);
         } else {
             errorView.setText(errorMsg);
             animateErrorViewIn();
@@ -90,6 +103,12 @@ public abstract class MvpLceActivity<CV extends View, M, V extends MvpLceView<M>
     protected void animateErrorViewIn() {
         LceAnimator.showErrorView(loadingView, contentView, errorView);
     }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        loadingView = null;
+        contentView = null;
+        errorView = null;
+    }
 }
-
-

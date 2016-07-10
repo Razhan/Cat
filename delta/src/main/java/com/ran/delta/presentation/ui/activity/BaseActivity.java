@@ -1,18 +1,21 @@
-package com.ran.delta.presentation;
+package com.ran.delta.presentation.ui.activity;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.ran.delta.presentation.ui.view.IBaseView;
+
 import butterknife.ButterKnife;
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity implements IBaseView {
 
     public static final String STATUS_BAR = "set_status_bar";
     public static final String FULL_SCREEN = "set_full_screen";
@@ -22,11 +25,13 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected final String TAG = this.getClass().getSimpleName();
 
     private boolean isTranslucentStatusBar = false;
-    private boolean isAllowFullScreen = true;
+    private boolean isAllowFullScreen = false;
     private boolean isAllowScreenRotate = false;
     private boolean isDoubleBackExit = false;
 
     private boolean doubleBackToExitPressedOnce = true;
+
+    private ProgressDialog mProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +40,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         initParms(getIntent().getExtras());
 
         if (isAllowFullScreen) {
-            requestWindowFeature(Window.FEATURE_NO_TITLE);
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
 
         if (isTranslucentStatusBar) {
@@ -114,7 +119,58 @@ public abstract class BaseActivity extends AppCompatActivity {
         new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 2000);
     }
 
-    public void showMessage(String msg) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    @Override
+    public void showProgress(boolean flag, String message) {
+        if (mProgressDialog == null) {
+            mProgressDialog = new ProgressDialog(this);
+            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            mProgressDialog.setCancelable(flag);
+            mProgressDialog.setCanceledOnTouchOutside(false);
+            mProgressDialog.setMessage(message);
+        }
+
+        mProgressDialog.show();
+    }
+
+    @Override
+    public void showProgress(String message) {
+        showProgress(true, message);
+    }
+
+    @Override
+    public void showProgress() {
+        showProgress(true);
+    }
+
+    @Override
+    public void showProgress(boolean flag) {
+        showProgress(flag, "");
+    }
+
+    @Override
+    public void hideProgress() {
+        if (mProgressDialog == null)
+            return;
+
+        if (mProgressDialog.isShowing()) {
+            mProgressDialog.dismiss();
+        }
+    }
+
+    @Override
+    public void showToast(int resId) {
+        showToast(getString(resId));
+    }
+
+    @Override
+    public void showToast(String msg) {
+        if (!isFinishing()) {
+            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public Context getContext() {
+        return this;
     }
 }

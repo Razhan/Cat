@@ -2,8 +2,8 @@ package com.ran.delta.presentation.delegate;
 
 import android.os.Bundle;
 
-import com.ran.delta.presentation.MvpPresenter;
-import com.ran.delta.view.MvpView;
+import com.ran.delta.presentation.presenter.MvpPresenter;
+import com.ran.delta.presentation.ui.view.MvpView;
 
 public interface ActivityMvpDelegate<V extends MvpView, P extends MvpPresenter<V>> {
 

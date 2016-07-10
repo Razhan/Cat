@@ -1,8 +1,8 @@
-package com.ran.delta.presentation;
+package com.ran.delta.presentation.presenter;
 
 import android.support.annotation.UiThread;
 
-import com.ran.delta.view.MvpView;
+import com.ran.delta.presentation.ui.view.MvpView;
 
 public interface MvpPresenter<V extends MvpView> {
 

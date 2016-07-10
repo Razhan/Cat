@@ -1,4 +1,4 @@
-package com.ran.delta.view;
+package com.ran.delta.presentation.ui.view;
 
 public interface MvpView {
 

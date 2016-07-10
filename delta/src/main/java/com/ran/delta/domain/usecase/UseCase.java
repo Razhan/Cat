@@ -103,7 +103,6 @@ public abstract class UseCase<T> {
         public void build() {
             execute();
         }
-
     }
 
 }

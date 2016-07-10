@@ -2,16 +2,13 @@ package com.ef.cat.ui.activity;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
-import android.widget.LinearLayout;
 
 import com.ef.cat.R;
 import com.ef.cat.ui.fragment.TestFragment;
 import com.ef.cat.ui.widget.CollectInfoAdapter;
 import com.ef.cat.ui.widget.FixedViewPager;
 import com.ef.cat.ui.widget.ZoomOutSlideTransformer;
-import com.ran.delta.presentation.BaseActivity;
+import com.ran.delta.presentation.ui.activity.BaseActivity;
 import com.ran.delta.widget.CircleIndicator;
 
 import java.util.ArrayList;
@@ -48,11 +45,7 @@ public class CollectInfoActivity extends BaseActivity {
 
     @OnClick(R.id.collect_info_next)
     public void onClick() {
-        int currentPage = viewpager.getCurrentItem();
-
-        if (currentPage >= fragmentList.size() - 1) {
-            return;
-        } else {
+        if (viewpager.getCurrentItem() < fragmentList.size() - 1) {
             viewpager.setCurrentItem(viewpager.getCurrentItem() + 1, true);
         }
     }

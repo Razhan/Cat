@@ -1,8 +1,6 @@
-package com.ran.delta.presentation.ice;
+package com.ran.delta.presentation.ui.view;
 
 import android.support.annotation.UiThread;
-
-import com.ran.delta.view.MvpView;
 
 public interface MvpLceView<M> extends MvpView {
 

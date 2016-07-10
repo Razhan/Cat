@@ -45,8 +45,7 @@ public final class DialogFactory {
         return progressDialog;
     }
 
-    public static ProgressDialog createProgressDialog(Context context,
-                                                      @StringRes int messageResource) {
+    public static ProgressDialog createProgressDialog(Context context, @StringRes int messageResource) {
         return createProgressDialog(context, context.getString(messageResource));
     }
 

@@ -1,10 +1,10 @@
-package com.ran.delta.presentation;
+package com.ran.delta.presentation.presenter;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.annotation.UiThread;
 
-import com.ran.delta.view.MvpView;
+import com.ran.delta.presentation.ui.view.MvpView;
 
 import java.lang.ref.WeakReference;
 

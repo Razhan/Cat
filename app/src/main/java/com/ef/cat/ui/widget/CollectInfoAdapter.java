@@ -25,6 +25,4 @@ public class CollectInfoAdapter extends FragmentPagerAdapter {
         return list.get(arg0);
     }
 
-
-
 }

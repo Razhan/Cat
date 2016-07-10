@@ -11,7 +11,7 @@ import java.lang.reflect.Field;
 public class FixedViewPager extends ViewPager {
 
     private boolean isScrollable = true;
-    private ScrollerCustomDuration mScroller;
+    private CustomDurationScroller mScroller;
 
     public FixedViewPager(Context context) {
         super(context);
@@ -28,7 +28,7 @@ public class FixedViewPager extends ViewPager {
             Class<?> viewpager = ViewPager.class;
             Field scroller = viewpager.getDeclaredField("mScroller");
             scroller.setAccessible(true);
-            mScroller = new ScrollerCustomDuration(getContext(), new DecelerateInterpolator());
+            mScroller = new CustomDurationScroller(getContext(), new DecelerateInterpolator());
             scroller.set(this, mScroller);
         } catch (Exception ignored) {
         }

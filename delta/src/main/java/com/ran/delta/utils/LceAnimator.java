@@ -1,4 +1,4 @@
-package com.ran.delta.presentation.ice;
+package com.ran.delta.utils;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -10,7 +10,7 @@ import android.view.View;
 
 import com.ran.delta.R;
 
-public class LceAnimator {
+final public class LceAnimator {
 
     private LceAnimator() {
     }

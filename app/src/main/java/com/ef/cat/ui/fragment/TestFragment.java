@@ -9,19 +9,16 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ef.cat.R;
-
-import java.util.ArrayList;
+import com.ef.cat.ui.widget.TransmutableView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-/**
- * Created by ranzh on 7/6/2016.
- */
 public class TestFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
-    @BindView(R.id.textview)
-    TextView textview;
+    @BindView(R.id.textview)    TextView textview;
+    @BindView(R.id.tv)    TransmutableView jjsv;
 
     private String mParam1;
 
@@ -39,7 +36,6 @@ public class TestFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
         }
-
     }
 
     @Override
@@ -60,12 +56,17 @@ public class TestFragment extends Fragment {
     public void onStart() {
         super.onStart();
         textview.setText(mParam1);
+        jjsv.post(() -> jjsv.startAnim());
     }
-
 
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+    }
+
+    @OnClick(R.id.tv)
+    public void onClick(View view) {
+        ((TransmutableView)view).startAnim();
     }
 }

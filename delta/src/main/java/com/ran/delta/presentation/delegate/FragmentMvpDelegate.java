@@ -5,8 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
-import com.ran.delta.presentation.MvpPresenter;
-import com.ran.delta.view.MvpView;
+import com.ran.delta.presentation.presenter.MvpPresenter;
+import com.ran.delta.presentation.ui.view.MvpView;
 
 public interface FragmentMvpDelegate<V extends MvpView, P extends MvpPresenter<V>> {
 

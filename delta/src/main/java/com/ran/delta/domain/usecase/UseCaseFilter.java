@@ -1,7 +1,6 @@
 package com.ran.delta.domain.usecase;
 
-
-import com.ran.delta.domain.annotation.UseCaseMethod;
+import com.ran.delta.domain.annotation.UseCaseFunction;
 import com.ran.delta.utils.ClassUtils;
 
 import java.lang.annotation.Annotation;
@@ -16,7 +15,7 @@ final class UseCaseFilter {
         List<Method> methodsFiltered = getAnnotatedUseCaseMethods(useCase);
         if (methodsFiltered.isEmpty()) {
             throw new IllegalArgumentException("This object doesn't contain any use case to execute."
-                    + "Did you forget to add the @UseCaseMethod annotation?");
+                    + "Did you forget to add the @UseCaseFunction annotation?");
         } else if (methodsFiltered.size() == 1) {
             return methodsFiltered.get(0);
         }
@@ -24,7 +23,7 @@ final class UseCaseFilter {
         methodsFiltered = getMethodMatchingName(useCaseName, methodsFiltered);
         if (methodsFiltered.isEmpty()) {
             throw new IllegalArgumentException("The target doesn't contain any use case with this name."
-                    + "Did you forget to add the @UseCaseMethod annotation?");
+                    + "Did you forget to add the @UseCaseFunction annotation?");
         } else if (methodsFiltered.size() == 1) {
             return methodsFiltered.get(0);
         }
@@ -32,13 +31,13 @@ final class UseCaseFilter {
         methodsFiltered = getMethodMatchingArguments(args, methodsFiltered);
         if (methodsFiltered.isEmpty()) {
             throw new IllegalArgumentException("The target doesn't contain any use case with those args. "
-                    + "Did you forget to add the @UseCaseMethod annotation?");
+                    + "Did you forget to add the @UseCaseFunction annotation?");
         }
 
         if (methodsFiltered.size() > 1) {
             throw new IllegalArgumentException(
                     "The target contains more than one use case with the same signature. "
-                            + "You can use the 'name' property in @UseCaseMethod and invoke it with a param name");
+                            + "You can use the 'name' property in @UseCaseFunction and invoke it with a param name");
         }
 
         return methodsFiltered.get(0);
@@ -78,7 +77,7 @@ final class UseCaseFilter {
 
         Method[] methods = target.getClass().getMethods();
         for (Method method : methods) {
-            UseCaseMethod useCaseMethodMethod = method.getAnnotation(UseCaseMethod.class);
+            UseCaseFunction useCaseMethodMethod = method.getAnnotation(UseCaseFunction.class);
 
             if (useCaseMethodMethod != null) {
                 useCaseMethods.add(method);
@@ -145,7 +144,7 @@ final class UseCaseFilter {
         Iterator<Method> iteratorMethods = methodsFiltered.iterator();
         while (iteratorMethods.hasNext()) {
             Method method = iteratorMethods.next();
-            UseCaseMethod annotation = method.getAnnotation(UseCaseMethod.class);
+            UseCaseFunction annotation = method.getAnnotation(UseCaseFunction.class);
             if (!(annotation.name().equals(nameUseCase))) {
                 iteratorMethods.remove();
             }
