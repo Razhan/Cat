@@ -1,4 +1,4 @@
-package com.ran.delta.widget.bottombar;
+package com.ran.delta.widget.bottomBar;
 
 import android.annotation.TargetApi;
 import android.app.Activity;

@@ -10,7 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.PopupMenu;
 
-import com.ran.delta.widget.bottombar.BottomBarTab;
+import com.ran.delta.widget.bottomBar.BottomBarTab;
 
 public final class MiscUtils {
 
