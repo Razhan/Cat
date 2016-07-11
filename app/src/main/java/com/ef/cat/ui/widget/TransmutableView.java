@@ -7,6 +7,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
@@ -20,6 +22,8 @@ public class TransmutableView extends View {
     public static final int STATE_ANIM_LOOP = 1;
     public static final int STATE_ANIM_START = 2;
     public static final int STATE_ANIM_STOP = 3;
+
+    public static final String SAVED_STATE = "saved_state";
 
     public static final int DEFAULT_ANIM_FULL_TIME = 1000;
     public static final int DEFAULT_ANIM_HALF_TIME = 200;
@@ -137,8 +141,8 @@ public class TransmutableView extends View {
         paint.setAntiAlias(true);
         paint.setStrokeCap(Paint.Cap.ROUND);
         canvas.save();
-        paint.setColor(Color.WHITE);
-        paint.setStrokeWidth(4);
+        paint.setColor(Color.parseColor(mColorTran));
+        paint.setStrokeWidth(6);
         paint.setStyle(Paint.Style.STROKE);
         canvas.drawCircle(cx, cy, cr, paint);
         canvas.restore();
@@ -147,7 +151,7 @@ public class TransmutableView extends View {
     private void drawLoopView(Paint paint, Canvas canvas) {
         paint.setAntiAlias(true);
         paint.setColor(Color.parseColor(mColorTran));
-        paint.setStrokeWidth(4);
+        paint.setStrokeWidth(6);
         paint.setStyle(Paint.Style.STROKE);
         canvas.drawCircle(cx, cy, cr, paint);
         mRectF.left = cx - cr;
@@ -264,4 +268,13 @@ public class TransmutableView extends View {
         return valueAnimator;
     }
 
+    @Override
+    protected void onRestoreInstanceState(Parcelable state) {
+        mState = STATE_ANIM_NONE;
+        super.onRestoreInstanceState(state);
+    }
+
+    public int getState() {
+        return mState;
+    }
 }

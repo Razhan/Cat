@@ -1,4 +1,4 @@
-package com.ran.delta.widget.fragment;
+package com.ran.delta.widget.fragmentManager;
 
 import android.support.v4.app.Fragment;
 

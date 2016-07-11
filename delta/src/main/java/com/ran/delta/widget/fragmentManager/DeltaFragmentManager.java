@@ -1,4 +1,4 @@
-package com.ran.delta.widget.fragment;
+package com.ran.delta.widget.fragmentManager;
 
 import android.os.Bundle;
 import android.support.annotation.IdRes;

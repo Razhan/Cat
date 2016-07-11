@@ -18,7 +18,7 @@ import android.widget.TextView;
 
 import com.ran.delta.R;
 import com.ran.delta.utils.MiscUtils;
-import com.ran.delta.widget.fragment.DeltaFragmentManager;
+import com.ran.delta.widget.fragmentManager.DeltaFragmentManager;
 
 public class BottomBar extends FrameLayout implements View.OnClickListener {
     private static final long ANIMATION_DURATION = 150;

@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.TextView;
 
 import com.ef.cat.R;
@@ -43,6 +44,17 @@ public class TestFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_test, container, false);
         ButterKnife.bind(this, view);
+
+        ViewTreeObserver observer = jjsv.getViewTreeObserver();
+        observer .addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                if (jjsv.getState() == TransmutableView.STATE_ANIM_NONE) {
+                    jjsv.post(() -> jjsv.startAnim());
+                }
+            }
+        });
+
         textview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,10 +67,7 @@ public class TestFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        textview.setText(mParam1);
-        jjsv.post(() -> jjsv.startAnim());
     }
-
 
     @Override
     public void onDestroyView() {
