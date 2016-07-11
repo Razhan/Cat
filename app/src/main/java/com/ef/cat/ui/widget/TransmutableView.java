@@ -23,8 +23,6 @@ public class TransmutableView extends View {
     public static final int STATE_ANIM_START = 2;
     public static final int STATE_ANIM_STOP = 3;
 
-    public static final String SAVED_STATE = "saved_state";
-
     public static final int DEFAULT_ANIM_FULL_TIME = 1000;
     public static final int DEFAULT_ANIM_HALF_TIME = 200;
     public static final float DEFAULT_ANIM_START = 0;
@@ -86,6 +84,8 @@ public class TransmutableView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
+
+
         super.onDraw(canvas);
         switch (mState) {
             case STATE_ANIM_NONE:
@@ -108,6 +108,16 @@ public class TransmutableView extends View {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         int width = measureDimension(400, widthMeasureSpec);
         int height = measureDimension(200, heightMeasureSpec);
+
+        cr = height / 3;
+        cx = width / 2;
+        cy = height / 2;
+
+        mRectF.top = cy - cr;
+        mRectF.bottom = cy + cr;
+        mRectF2.top = cy - cr;
+        mRectF2.bottom = cy + cr;
+
         setMeasuredDimension(width, height);
     }
 
@@ -129,14 +139,6 @@ public class TransmutableView extends View {
     }
 
     private void drawNormalView(Paint paint, Canvas canvas) {
-        cr = getHeight() / 3;
-        cx = getWidth() / 2;
-        cy = getHeight() / 2;
-        mRectF.top = cy - cr;
-        mRectF.bottom = cy + cr;
-        mRectF2.top = cy - cr;
-        mRectF2.bottom = cy + cr;
-
         paint.reset();
         paint.setAntiAlias(true);
         paint.setStrokeCap(Paint.Cap.ROUND);
@@ -180,8 +182,7 @@ public class TransmutableView extends View {
 
             canvas.drawArc(mRectF, 90, -180, false, paint);
             canvas.drawLine(mRectF2.left + cr, mRectF.top, mRectF.right - cr, mRectF.top, paint);
-            canvas.drawLine(mRectF2.left + cr, mRectF.bottom, mRectF.right - cr, mRectF.bottom,
-                    paint);
+            canvas.drawLine(mRectF2.left + cr, mRectF.bottom, mRectF.right - cr, mRectF.bottom, paint);
             canvas.drawArc(mRectF2, 90, 180, false, paint);
         } else {
             float baseline = (mRectF.bottom + mRectF.top - fontMetrics.bottom - fontMetrics.top) / 2;
@@ -274,7 +275,4 @@ public class TransmutableView extends View {
         super.onRestoreInstanceState(state);
     }
 
-    public int getState() {
-        return mState;
-    }
 }

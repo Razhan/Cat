@@ -49,9 +49,8 @@ public class TestFragment extends Fragment {
         observer .addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                if (jjsv.getState() == TransmutableView.STATE_ANIM_NONE) {
-                    jjsv.post(() -> jjsv.startAnim());
-                }
+                jjsv.startAnim();
+                jjsv.getViewTreeObserver().removeOnGlobalLayoutListener(this);
             }
         });
 
