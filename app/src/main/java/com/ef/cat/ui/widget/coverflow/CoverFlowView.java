@@ -19,23 +19,17 @@ public class CoverFlowView extends RecyclerView {
 
     public static final int VERTICAL = 1;
     public static final int HORIZONTAL = 2;
-
+    private final Camera mCamera = new Camera();
+    private final Matrix mMatrix = new Matrix();
+    private final Paint mPaint = new Paint(Paint.FILTER_BITMAP_FLAG);
     private int last_position = 0;
     private int current_position = 0;
     private int left_border_position = 0;
     private int right_border_position = 0;
-
     private int orientation = 0;
-
     private boolean flag = false;
-
     private CoverFlowItemListener coverFlowListener;
     private LinearLayoutManager layoutManager;
-
-    private final Camera mCamera = new Camera();
-    private final Matrix mMatrix = new Matrix();
-
-    private final Paint mPaint = new Paint(Paint.FILTER_BITMAP_FLAG);
 
 
     public CoverFlowView(Context context) {
@@ -116,7 +110,7 @@ public class CoverFlowView extends RecyclerView {
     protected int getChildDrawingOrder(int childCount, int i) {
         int centerChild = childCount / 2;
         if (!flag) {
-            ((CoverFlowAdapter) getAdapter()).setBorder_position(centerChild);
+            ((CoverFlowAdapter) getAdapter()).setBorderPosition(centerChild);
             left_border_position = centerChild;
             right_border_position = getAdapter().getItemCount() - centerChild - 1;
             flag = true;
@@ -139,46 +133,8 @@ public class CoverFlowView extends RecyclerView {
 
     }
 
-    public interface CoverFlowItemListener {
-        void onItemChanged(int position);
-
-        void onItemSelected(int position);
-    }
-
     public void setCoverFlowListener(CoverFlowItemListener coverFlowListener) {
         this.coverFlowListener = coverFlowListener;
-    }
-
-    public class CoverFlowScrollListener extends RecyclerView.OnScrollListener {
-        @Override
-        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-            super.onScrollStateChanged(recyclerView, newState);
-            if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-
-                coverFlowListener.onItemSelected(current_position);
-                if (current_position > right_border_position) {
-                    scrollToCenter(right_border_position);
-                    return;
-                }
-                if (current_position < left_border_position) {
-                    scrollToCenter(left_border_position);
-                    return;
-                }
-
-                int first_position = layoutManager.findFirstVisibleItemPosition();
-                View centerChild = CoverFlowView.this.getChildAt(current_position - first_position);
-                int[] location = new int[2];
-                centerChild.getLocationInWindow(location);
-                int centerItemX = location[0] + centerChild.getWidth() / 2;
-
-                Display display = getDisplay();
-                final Point size = new Point();
-                display.getSize(size);
-                int width = size.x;
-                int centerX = width / 2;
-                CoverFlowView.this.smoothScrollBy(centerItemX - centerX, 0);
-            }
-        }
     }
 
     public void scrollToCenter(int position) {
@@ -212,6 +168,44 @@ public class CoverFlowView extends RecyclerView {
         }
         this.setLayoutManager(layoutManager);
         this.addItemDecoration(itemDecoration);
+    }
+
+    public interface CoverFlowItemListener {
+        void onItemChanged(int position);
+
+        void onItemSelected(int position);
+    }
+
+    public class CoverFlowScrollListener extends RecyclerView.OnScrollListener {
+        @Override
+        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            super.onScrollStateChanged(recyclerView, newState);
+            if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+
+                coverFlowListener.onItemSelected(current_position);
+                if (current_position > right_border_position) {
+                    scrollToCenter(right_border_position);
+                    return;
+                }
+                if (current_position < left_border_position) {
+                    scrollToCenter(left_border_position);
+                    return;
+                }
+
+                int first_position = layoutManager.findFirstVisibleItemPosition();
+                View centerChild = CoverFlowView.this.getChildAt(current_position - first_position);
+                int[] location = new int[2];
+                centerChild.getLocationInWindow(location);
+                int centerItemX = location[0] + centerChild.getWidth() / 2;
+
+                Display display = getDisplay();
+                final Point size = new Point();
+                display.getSize(size);
+                int width = size.x;
+                int centerX = width / 2;
+                CoverFlowView.this.smoothScrollBy(centerItemX - centerX, 0);
+            }
+        }
     }
 
     private class DividerItemDecoration extends RecyclerView.ItemDecoration {

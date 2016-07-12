@@ -7,10 +7,10 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 
-import com.ran.delta.presentation.presenter.MvpPresenter;
 import com.ran.delta.presentation.delegate.FragmentMvpDelegate;
 import com.ran.delta.presentation.delegate.FragmentMvpDelegateImpl;
 import com.ran.delta.presentation.delegate.MvpDelegateCallback;
+import com.ran.delta.presentation.presenter.MvpPresenter;
 import com.ran.delta.presentation.ui.view.MvpView;
 
 public abstract class MvpFragment<V extends MvpView, P extends MvpPresenter<V>> extends BaseFragment

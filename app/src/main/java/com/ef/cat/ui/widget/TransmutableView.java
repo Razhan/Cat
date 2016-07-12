@@ -7,7 +7,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
-import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -84,8 +83,6 @@ public class TransmutableView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-
-
         super.onDraw(canvas);
         switch (mState) {
             case STATE_ANIM_NONE:
@@ -121,17 +118,17 @@ public class TransmutableView extends View {
         setMeasuredDimension(width, height);
     }
 
-    private int measureDimension(int defaultSize, int measureSpec){
+    private int measureDimension(int defaultSize, int measureSpec) {
         int result;
 
         int specMode = MeasureSpec.getMode(measureSpec);
         int specSize = MeasureSpec.getSize(measureSpec);
 
-        if(specMode == MeasureSpec.EXACTLY){
+        if (specMode == MeasureSpec.EXACTLY) {
             result = specSize;
-        }else{
+        } else {
             result = defaultSize;
-            if(specMode == MeasureSpec.AT_MOST){
+            if (specMode == MeasureSpec.AT_MOST) {
                 result = Math.min(result, specSize);
             }
         }
@@ -258,8 +255,8 @@ public class TransmutableView extends View {
         valueAnimator.setDuration(time);
         valueAnimator.setInterpolator(new DecelerateInterpolator());
         valueAnimator.addUpdateListener(animator -> {
-                mProgress = (float) animator.getAnimatedValue();
-                TransmutableView.this.invalidate();
+            mProgress = (float) animator.getAnimatedValue();
+            TransmutableView.this.invalidate();
         });
 
         if (!valueAnimator.isRunning()) {

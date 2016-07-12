@@ -8,9 +8,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ran.delta.R;
-import com.ran.delta.utils.LceAnimator;
-import com.ran.delta.presentation.ui.view.MvpLceView;
 import com.ran.delta.presentation.presenter.MvpPresenter;
+import com.ran.delta.presentation.ui.view.MvpLceView;
+import com.ran.delta.utils.LceAnimator;
 
 public abstract class MvpLceFragment<CV extends View, M, V extends MvpLceView<M>, P extends MvpPresenter<V>>
         extends MvpFragment<V, P> implements MvpLceView<M> {

@@ -1,46 +1,30 @@
 package com.ran.delta.presentation.presenter;
 
-import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.annotation.UiThread;
 
 import com.ran.delta.presentation.ui.view.MvpView;
 
-import java.lang.ref.WeakReference;
-
 public abstract class MvpBasePresenter<V extends MvpView> implements MvpPresenter<V> {
 
-    protected Context mContext;
-    private WeakReference<V> viewRef;
-
-    public void setContext(Context mContext) {
-        this.mContext = mContext;
-    }
+    private V viewRef;
 
     @UiThread
     @Override
     public void attachView(V view) {
-        viewRef = new WeakReference(view);
+        viewRef = view;
     }
 
     @UiThread
     @Nullable
     public V getView() {
-        return viewRef == null ? null : viewRef.get();
-    }
-
-    @UiThread
-    public boolean isViewAttached() {
-        return viewRef != null && viewRef.get() != null;
+        return viewRef;
     }
 
     @UiThread
     @Override
     public void detachView(boolean retainInstance) {
-        mContext = null;
-
         if (viewRef != null) {
-            viewRef.clear();
             viewRef = null;
         }
 

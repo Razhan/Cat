@@ -18,8 +18,10 @@ import butterknife.OnClick;
 
 public class TestFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
-    @BindView(R.id.textview)    TextView textview;
-    @BindView(R.id.tv)    TransmutableView jjsv;
+    @BindView(R.id.textview)
+    TextView textview;
+    @BindView(R.id.tv)
+    TransmutableView jjsv;
 
     private String mParam1;
 
@@ -46,7 +48,7 @@ public class TestFragment extends Fragment {
         ButterKnife.bind(this, view);
 
         ViewTreeObserver observer = jjsv.getViewTreeObserver();
-        observer .addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+        observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
                 jjsv.startAnim();
@@ -75,6 +77,6 @@ public class TestFragment extends Fragment {
 
     @OnClick(R.id.tv)
     public void onClick(View view) {
-        ((TransmutableView)view).startAnim();
+        ((TransmutableView) view).startAnim();
     }
 }

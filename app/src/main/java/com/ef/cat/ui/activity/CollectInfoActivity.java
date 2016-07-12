@@ -19,8 +19,10 @@ import butterknife.OnClick;
 
 public class CollectInfoActivity extends BaseActivity {
 
-    @BindView(R.id.collect_info_viewpager)      FixedViewPager viewpager;
-    @BindView(R.id.collect_info_indicator)      CircleIndicator indicator;
+    @BindView(R.id.collect_info_viewpager)
+    FixedViewPager viewpager;
+    @BindView(R.id.collect_info_indicator)
+    CircleIndicator indicator;
 
     private List<Fragment> fragmentList;
 

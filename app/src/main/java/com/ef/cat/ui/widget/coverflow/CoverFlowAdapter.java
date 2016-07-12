@@ -4,6 +4,6 @@ import android.support.v7.widget.RecyclerView;
 
 public abstract class CoverFlowAdapter extends RecyclerView.Adapter {
 
-    public abstract void setBorder_position(int border_position);
+    public abstract void setBorderPosition(int pos);
 
 }

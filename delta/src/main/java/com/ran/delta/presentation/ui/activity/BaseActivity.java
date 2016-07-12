@@ -7,10 +7,14 @@ import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.CallSuper;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ran.delta.R;
 import com.ran.delta.presentation.ui.view.IBaseView;
 
 import butterknife.ButterKnife;
@@ -32,6 +36,8 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
     private boolean doubleBackToExitPressedOnce = true;
 
     private ProgressDialog mProgressDialog;
+    private TextView toolbarTitle;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +82,31 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
 
     public abstract int bindLayout();
 
-    public abstract void initView();
+    @CallSuper
+    public void initView() {
+        toolbarTitle = (TextView) findViewById(R.id.toolbar_title);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        if (toolbar == null || toolbarTitle == null) {
+            return;
+        }
+
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+            toolbarTitle.setText(getToolBarTitle());
+            getSupportActionBar().setDisplayHomeAsUpEnabled(showBackIcon());
+            toolbar.setNavigationOnClickListener(v -> onBackPressed());
+        }
+    }
+
+    protected boolean showBackIcon() {
+        return true;
+    }
+
+    protected String getToolBarTitle() {
+        return "";
+    }
 
     public void startActivity(Class<?> clz) {
         startActivity(clz, null);

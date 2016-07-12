@@ -7,8 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.ran.delta.presentation.ui.view.IBaseView;
 import com.ran.delta.presentation.ui.activity.BaseActivity;
+import com.ran.delta.presentation.ui.view.IBaseView;
 
 import butterknife.ButterKnife;
 

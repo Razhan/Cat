@@ -123,7 +123,7 @@ public class BottomBar extends FrameLayout implements View.OnClickListener {
         setLayoutParams(params);
 
         RelativeLayout itemContainerRoot = (RelativeLayout) View.inflate(mContext,
-                R.layout.container_bottom_bar_item, null);
+                R.layout.view_bottom_bar, null);
 
         mUserContentContainer = (FrameLayout) itemContainerRoot.findViewById(R.id.bb_user_content_container);
         mItemContainer = (LinearLayout) itemContainerRoot.findViewById(R.id.bb_bottom_bar_item_container);

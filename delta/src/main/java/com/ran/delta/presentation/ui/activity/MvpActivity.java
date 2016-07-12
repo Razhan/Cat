@@ -4,10 +4,10 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 
 import com.ran.delta.domain.exception.ErrorMessageFactory;
-import com.ran.delta.presentation.presenter.MvpPresenter;
 import com.ran.delta.presentation.delegate.ActivityMvpDelegate;
 import com.ran.delta.presentation.delegate.ActivityMvpDelegateCallback;
 import com.ran.delta.presentation.delegate.ActivityMvpDelegateImpl;
+import com.ran.delta.presentation.presenter.MvpPresenter;
 import com.ran.delta.presentation.ui.view.MvpView;
 
 import javax.inject.Inject;

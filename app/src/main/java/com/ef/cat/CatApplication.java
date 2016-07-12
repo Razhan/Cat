@@ -5,6 +5,7 @@ import android.app.Application;
 import com.ef.cat.injector.components.ApplicationComponent;
 import com.ef.cat.injector.components.DaggerApplicationComponent;
 import com.ef.cat.injector.modules.ApplicationModule;
+import com.squareup.leakcanary.LeakCanary;
 
 public class CatApplication extends Application {
 
@@ -14,6 +15,8 @@ public class CatApplication extends Application {
     public void onCreate() {
         super.onCreate();
         this.initializeInjector();
+
+        LeakCanary.install(this);
     }
 
     private void initializeInjector() {
