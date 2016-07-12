@@ -11,17 +11,19 @@ import com.ran.delta.presentation.presenter.MvpBasePresenter;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import rx.functions.Action1;
+
 public class SplashPresenter extends MvpBasePresenter<SplashView> {
 
-    private final UseCase<News> useCase;
+    private final UseCase useCase;
 
     @Inject
-    public SplashPresenter(@Named("Initialization") UseCase<News> newsUseCase) {
+    public SplashPresenter(@Named("Initialization") UseCase newsUseCase) {
         this.useCase = newsUseCase;
     }
 
     public void getNews() {
-        useCase.builder()
+        useCase.new Builder<News>()
                 .useCaseFunction("getNews")
                 .onSuccess(news -> {
                     news.getCount();
@@ -33,7 +35,7 @@ public class SplashPresenter extends MvpBasePresenter<SplashView> {
     }
 
     public void unzip() {
-        useCase.builder()
+        useCase.new Builder<Boolean>()
                 .useCaseArgs(Constant.FOLDER, "hub4wsj_sc_8k.zip", "unzip")
                 .onSuccess(bool -> {
                     Log.d("", "");

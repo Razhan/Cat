@@ -41,12 +41,13 @@ public class SplashActivity extends MvpActivity<SplashView, SplashPresenter> imp
 
     @OnClick(R.id.tv)
     public void onClick() {
-//        presenter.getNews();
-        try {
-            MiscUtils.unzip(Constant.FOLDER, "hub4wsj_sc_8k.zip", "unzip");
-        } catch (Exception e) {
+        presenter.unzip();
 
-        }
+//        try {
+//            MiscUtils.unzip(Constant.FOLDER, "hub4wsj_sc_8k.zip", "unzip");
+//        } catch (Exception e) {
+//
+//        }
 
     }
 }

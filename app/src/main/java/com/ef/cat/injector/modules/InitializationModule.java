@@ -1,6 +1,5 @@
 package com.ef.cat.injector.modules;
 
-import com.ef.cat.data.model.News;
 import com.ef.cat.injector.PerActivity;
 import com.ef.cat.usecase.InitializationUseCase;
 import com.ran.delta.domain.usecase.UseCase;
@@ -16,7 +15,7 @@ public class InitializationModule {
     @Provides
     @PerActivity
     @Named("Initialization")
-    UseCase<News> provideNewsListUseCase(InitializationUseCase useCase) {
+    UseCase provideNewsListUseCase(InitializationUseCase useCase) {
         return useCase;
     }
 

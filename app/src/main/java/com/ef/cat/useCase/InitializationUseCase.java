@@ -11,7 +11,7 @@ import javax.inject.Inject;
 import rx.Observable;
 import rx.Subscriber;
 
-public class InitializationUseCase extends UseCase<News> {
+public class InitializationUseCase extends UseCase {
 
     private CatRepository catRepository;
 
