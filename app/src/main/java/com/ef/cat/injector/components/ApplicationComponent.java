@@ -2,6 +2,7 @@ package com.ef.cat.injector.components;
 
 import android.content.Context;
 
+import com.ef.cat.utils.SystemText;
 import com.ef.cat.data.repostory.RestfulService;
 import com.ef.cat.injector.modules.ApplicationModule;
 import com.ran.delta.domain.exception.ErrorMessageFactory;
@@ -19,4 +20,7 @@ public interface ApplicationComponent {
     RestfulService getRestfulService();
 
     ErrorMessageFactory getErrorMessageFactory();
+
+    SystemText getSystemText();
+
 }

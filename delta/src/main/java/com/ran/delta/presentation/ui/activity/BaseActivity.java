@@ -131,8 +131,20 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
         startActivityForResult(intent, requestCode);
     }
 
+    public void setTranslucentStatusBar(boolean translucentStatusBar) {
+        isTranslucentStatusBar = translucentStatusBar;
+    }
+
+    public void setAllowFullScreen(boolean allowFullScreen) {
+        isAllowFullScreen = allowFullScreen;
+    }
+
+    public void setAllowScreenRotate(boolean allowScreenRotate) {
+        isAllowScreenRotate = allowScreenRotate;
+    }
+
     public void setDoubleBackExit(boolean isBackExit) {
-        this.isDoubleBackExit = isBackExit;
+        isDoubleBackExit = isBackExit;
     }
 
     @Override

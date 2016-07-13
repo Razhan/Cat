@@ -2,6 +2,7 @@ package com.ran.delta.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.AssetFileDescriptor;
 import android.content.res.Resources;
 import android.os.Environment;
 import android.support.annotation.MenuRes;
@@ -14,12 +15,19 @@ import android.widget.PopupMenu;
 
 import com.ran.delta.widget.bottomBar.BottomBarTab;
 
+import org.json.JSONObject;
+
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.FileChannel;
+import java.nio.charset.Charset;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -69,18 +77,24 @@ public final class MiscUtils {
             ZipEntry ze;
             int count;
             byte[] buffer = new byte[8192];
+
             while ((ze = zis.getNextEntry()) != null) {
                 File file = new File(targetDirectory, ze.getName());
                 File dir = ze.isDirectory() ? file : file.getParentFile();
-                if (!dir.isDirectory() && !dir.mkdirs())
-                    throw new FileNotFoundException("Failed to ensure directory: " +
-                            dir.getAbsolutePath());
-                if (ze.isDirectory())
+
+                if (!dir.isDirectory() && !dir.mkdirs()) {
+                    throw new FileNotFoundException("Failed to ensure directory: " + dir.getAbsolutePath());
+                }
+
+                if (ze.isDirectory()) {
                     continue;
+                }
+
                 FileOutputStream fout = new FileOutputStream(file);
                 try {
-                    while ((count = zis.read(buffer)) != -1)
+                    while ((count = zis.read(buffer)) != -1) {
                         fout.write(buffer, 0, count);
+                    }
                 } finally {
                     fout.close();
                 }
@@ -99,7 +113,7 @@ public final class MiscUtils {
         return mFolder.getAbsolutePath() + File.separator;
     }
 
-    public static boolean createDirIfNotExists(String path) {
+    public static boolean createDir(String path) {
         boolean ret = true;
         File file = new File(Environment.getExternalStorageDirectory(), path);
         if (!file.exists()) {
@@ -108,6 +122,79 @@ public final class MiscUtils {
             }
         }
         return ret;
+    }
+
+    public static boolean deleteFile(String path) {
+        if (path == null || path.isEmpty()) {
+            return true;
+        }
+
+        File file = new File(path);
+        if (!file.exists()) {
+            return true;
+        }
+        if (file.isFile()) {
+            return file.delete();
+        }
+        if (!file.isDirectory()) {
+            return false;
+        }
+        for (File f : file.listFiles()) {
+            if (f.isFile()) {
+                f.delete();
+            } else if (f.isDirectory()) {
+                deleteFile(f.getAbsolutePath());
+            }
+        }
+        return file.delete();
+    }
+
+    public static String getSystemLanguage(Context context) {
+        String language = context.getResources().getConfiguration().locale
+                .getLanguage().toLowerCase();
+
+        String country = context.getResources().getConfiguration().locale
+                .getCountry().toLowerCase();
+
+        if (language.equals(country) || language.equals("en")) {
+            return language;
+        } else {
+            return language + "-" + country;
+        }
+    }
+
+    public static JSONObject readJsonFile(Context context, String dir, String path) {
+        FileInputStream stream = null;
+
+        File file = new File(getApplicationFolder(dir) + path);
+
+        try {
+            if (!file.exists()) {
+                AssetFileDescriptor fileDescriptor = context.getAssets().openFd(path);
+                stream = fileDescriptor.createInputStream();
+            } else {
+                stream = new FileInputStream(file);
+            }
+        } catch (Exception e) {
+        }
+
+        try {
+            FileChannel fc = stream.getChannel();
+            MappedByteBuffer bb = fc.map(FileChannel.MapMode.READ_ONLY, 0, fc.size());
+
+            String jsonStr = Charset.defaultCharset().decode(bb).toString();
+            return new JSONObject(jsonStr);
+        } catch (Exception e) {
+        } finally {
+            try {
+                if (stream != null) {
+                    stream.close();
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return null;
     }
 
 }

@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.ef.cat.ErrorMessageDeterminer;
+import com.ef.cat.utils.SystemText;
 import com.ef.cat.data.repostory.RestfulService;
 import com.ran.delta.domain.exception.ErrorMessageFactory;
 
@@ -38,4 +39,9 @@ public class ApplicationModule {
         return new ErrorMessageDeterminer();
     }
 
+    @Provides
+    @Singleton
+    SystemText provideSystemText() {
+        return new SystemText(application);
+    }
 }

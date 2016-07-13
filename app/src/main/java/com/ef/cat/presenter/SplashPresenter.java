@@ -11,8 +11,6 @@ import com.ran.delta.presentation.presenter.MvpBasePresenter;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import rx.functions.Action1;
-
 public class SplashPresenter extends MvpBasePresenter<SplashView> {
 
     private final UseCase useCase;
@@ -36,7 +34,7 @@ public class SplashPresenter extends MvpBasePresenter<SplashView> {
 
     public void unzip() {
         useCase.new Builder<Boolean>()
-                .useCaseArgs(Constant.FOLDER, "hub4wsj_sc_8k.zip", "unzip")
+                .useCaseArgs(Constant.APP_FOLDER, "AWS.zip", Constant.UNZIP_FOLDER)
                 .onSuccess(bool -> {
                     Log.d("", "");
                 })
