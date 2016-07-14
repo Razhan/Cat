@@ -7,7 +7,6 @@ import android.content.res.Resources;
 import android.os.Environment;
 import android.support.annotation.MenuRes;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,13 +17,11 @@ import com.ran.delta.widget.bottomBar.BottomBarTab;
 import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
@@ -68,9 +65,9 @@ public final class MiscUtils {
         return tabs;
     }
 
-    public static void unzip(String folderName, String zipFile, String targetDirectory) throws IOException {
-        zipFile = getApplicationFolder(folderName) + zipFile;
-        targetDirectory = getApplicationFolder(folderName) + targetDirectory;
+    public static void unzip(String targetDirectory, String zipFile) throws IOException {
+        targetDirectory = getFolderPath(targetDirectory);
+        zipFile = targetDirectory + zipFile;
 
         ZipInputStream zis = new ZipInputStream(new BufferedInputStream(new FileInputStream(zipFile)));
         try {
@@ -104,7 +101,7 @@ public final class MiscUtils {
         }
     }
 
-    private static String getApplicationFolder(String folderName) {
+    public static String getFolderPath(String folderName) {
             File mFolder = new File(Environment.getExternalStorageDirectory() + File.separator + folderName);
             if(!mFolder.exists()) {
                 mFolder.mkdirs();
@@ -166,7 +163,7 @@ public final class MiscUtils {
     public static JSONObject readJsonFile(Context context, String dir, String path) {
         FileInputStream stream = null;
 
-        File file = new File(getApplicationFolder(dir) + path);
+        File file = new File(getFolderPath(dir) + path);
 
         try {
             if (!file.exists()) {

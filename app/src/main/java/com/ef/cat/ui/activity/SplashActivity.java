@@ -56,11 +56,11 @@ public class SplashActivity extends MvpActivity<SplashView, SplashPresenter> imp
 
     @OnClick(R.id.tv)
     public void onClick() {
-//        presenter.unzip();
+        presenter.unzip();
 //        MiscUtils.getSystemLanguage(this);
 //        String ss = systemText.getSystemText("app_preview_name");
 
-        showBottomBar();
+//        presenter.downloadResourceFile();
     }
 
     private void showBottomBar() {

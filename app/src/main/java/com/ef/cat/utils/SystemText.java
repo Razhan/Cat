@@ -9,15 +9,15 @@ import org.json.JSONObject;
 
 public class SystemText {
 
-    private static JSONObject systemText;
+    private JSONObject systemText;
 
     public SystemText(Context context) {
         String language = MiscUtils.getSystemLanguage(context);
-        JSONObject mapping = MiscUtils.readJsonFile(context, Constant.UNZIP_FOLDER, Constant.MAPPING_FILE);
+        JSONObject mapping = MiscUtils.readJsonFile(context, Constant.RESOURCE_FOLDER, Constant.MAPPING_FILE);
         String textFile = mapping.optString(language);
 
         if (textFile == null || textFile.isEmpty()) {
-            return;
+            textFile = "en";
         }
         systemText = MiscUtils.readJsonFile(context, Constant.SYSTEM_TEXT_FOLDER, textFile + ".json");
     }

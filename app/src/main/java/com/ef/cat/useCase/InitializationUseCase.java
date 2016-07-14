@@ -8,6 +8,7 @@ import com.ran.delta.utils.MiscUtils;
 
 import javax.inject.Inject;
 
+import okhttp3.ResponseBody;
 import rx.Observable;
 import rx.Subscriber;
 
@@ -26,12 +27,12 @@ public class InitializationUseCase extends UseCase {
     }
 
     @UseCaseFunction(name = "unzip")
-    public Observable<Boolean> unzip(String folder, String zipFile, String targetDirectory) {
+    public Observable<Boolean> unzip(String targetDirectory, String zipFile) {
         return Observable.create(new Observable.OnSubscribe<Boolean>() {
             @Override
             public void call(Subscriber<? super Boolean> subscriber) {
                 try {
-                    MiscUtils.unzip(folder, zipFile, targetDirectory);
+                    MiscUtils.unzip(targetDirectory, zipFile);
                     subscriber.onNext(true);
                     subscriber.onCompleted();
                 } catch (Exception e) {
@@ -40,4 +41,10 @@ public class InitializationUseCase extends UseCase {
             }
         });
     }
+
+    @UseCaseFunction(name = "download")
+    public Observable<ResponseBody> getResourceFile() {
+        return catRepository.getRestfulService().downloadFile();
+    }
+
 }

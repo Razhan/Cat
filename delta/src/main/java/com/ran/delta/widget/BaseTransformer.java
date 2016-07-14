@@ -3,7 +3,7 @@ package com.ran.delta.widget;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
-public abstract class ABaseTransformer implements ViewPager.PageTransformer {
+public abstract class BaseTransformer implements ViewPager.PageTransformer {
 
     protected static final float min(float val, float min) {
         return val < min ? min : val;

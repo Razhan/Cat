@@ -2,9 +2,9 @@ package com.ef.cat.ui.widget;
 
 import android.view.View;
 
-import com.ran.delta.widget.ABaseTransformer;
+import com.ran.delta.widget.BaseTransformer;
 
-public class ZoomOutSlideTransformer extends ABaseTransformer {
+public class ZoomOutSlideTransformer extends BaseTransformer {
 
     private static final float MIN_SCALE = 0.85f;
     private static final float MIN_ALPHA = 1f;
