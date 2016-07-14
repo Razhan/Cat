@@ -24,6 +24,15 @@
         <!--rsv:filledColor="#1A5F77"-->
         <!--/>-->
 
+
+
+    <com.ef.cat.ui.widget.TitledInput
+        android:id="@+id/rsv_small"
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+    />
+
     <LinearLayout
         android:id="@+id/splash_bottom_bar"
         android:layout_width="match_parent"
