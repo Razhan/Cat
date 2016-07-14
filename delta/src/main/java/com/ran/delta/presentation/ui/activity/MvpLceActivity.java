@@ -7,7 +7,7 @@ import android.widget.TextView;
 import com.ran.delta.R;
 import com.ran.delta.presentation.presenter.MvpPresenter;
 import com.ran.delta.presentation.ui.view.MvpLceView;
-import com.ran.delta.utils.LceAnimator;
+import com.ran.delta.utils.LceUtils;
 
 public abstract class MvpLceActivity<CV extends View, M, V extends MvpLceView<M>, P extends MvpPresenter<V>>
         extends MvpActivity<V, P> implements MvpLceView<M> {
@@ -63,7 +63,7 @@ public abstract class MvpLceActivity<CV extends View, M, V extends MvpLceView<M>
     }
 
     protected void animateLoadingViewIn() {
-        LceAnimator.showLoading(loadingView, contentView, errorView);
+        LceUtils.showLoading(loadingView, contentView, errorView);
     }
 
     @Override
@@ -72,7 +72,7 @@ public abstract class MvpLceActivity<CV extends View, M, V extends MvpLceView<M>
     }
 
     protected void animateContentViewIn() {
-        LceAnimator.showContent(loadingView, contentView, errorView);
+        LceUtils.showContent(loadingView, contentView, errorView);
     }
 
     @Override
@@ -88,7 +88,7 @@ public abstract class MvpLceActivity<CV extends View, M, V extends MvpLceView<M>
     }
 
     protected void animateErrorViewIn() {
-        LceAnimator.showErrorView(loadingView, contentView, errorView);
+        LceUtils.showErrorView(loadingView, contentView, errorView);
     }
 }
 

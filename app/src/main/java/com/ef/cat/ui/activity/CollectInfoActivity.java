@@ -33,6 +33,7 @@ public class CollectInfoActivity extends BaseActivity {
 
     @Override
     public void initView() {
+        super.initView();
         fragmentList = new ArrayList<>();
         fragmentList.add(TestFragment.newInstance("1"));
         fragmentList.add(TestFragment.newInstance("2"));

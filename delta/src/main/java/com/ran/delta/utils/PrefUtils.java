@@ -11,7 +11,7 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
-public final class Prefs {
+public final class PrefUtils {
 
     private static final String DEFAULT_SUFFIX = "_preferences";
     private static final String LENGTH = "#LENGTH";
@@ -26,7 +26,7 @@ public final class Prefs {
             return mPrefs;
         }
         throw new RuntimeException(
-                "Prefs class not correctly instantiated. Please call Builder.setContext().build() in the Application class onCreate.");
+                "PrefUtils class not correctly instantiated. Please call Builder.setContext().build() in the Application class onCreate.");
     }
 
     public static Map<String, ?> getAll() {
@@ -252,7 +252,7 @@ public final class Prefs {
 
         public void build() {
             if (mContext == null) {
-                throw new RuntimeException("Context not set, please set context before building the Prefs instance.");
+                throw new RuntimeException("Context not set, please set context before building the PrefUtils instance.");
             }
 
             if (TextUtils.isEmpty(mKey)) {
@@ -267,7 +267,7 @@ public final class Prefs {
                 mMode = ContextWrapper.MODE_PRIVATE;
             }
 
-            Prefs.initPrefs(mContext, mKey, mMode);
+            PrefUtils.initPrefs(mContext, mKey, mMode);
         }
     }
 }

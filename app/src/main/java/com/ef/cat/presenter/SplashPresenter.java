@@ -7,7 +7,7 @@ import com.ef.cat.data.model.News;
 import com.ef.cat.view.SplashView;
 import com.ran.delta.domain.usecase.UseCase;
 import com.ran.delta.presentation.presenter.MvpBasePresenter;
-import com.ran.delta.utils.MiscUtils;
+import com.ran.delta.utils.FileUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -63,7 +63,7 @@ public class SplashPresenter extends MvpBasePresenter<SplashView> {
     }
 
     private boolean writeFileToSD(ResponseBody responseBody) {
-        String path = MiscUtils.getFolderPath(Constant.APP_FOLDER);
+        String path = FileUtils.getFolderPath(Constant.APP_FOLDER);
         File file = new File(path + Constant.RESOURCE_ZIP_FILE_NAME);
 
         try {

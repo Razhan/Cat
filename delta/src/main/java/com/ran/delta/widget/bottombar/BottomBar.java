@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.ran.delta.R;
 import com.ran.delta.utils.MiscUtils;
+import com.ran.delta.utils.ViewUtils;
 import com.ran.delta.widget.fragmentManager.DeltaFragmentManager;
 
 public class BottomBar extends FrameLayout implements View.OnClickListener {
@@ -111,8 +112,8 @@ public class BottomBar extends FrameLayout implements View.OnClickListener {
 
         mInActiveColor = Color.parseColor("#747474");
 
-        mTwoDp = MiscUtils.dpToPixel(mContext, 2);
-        mMaxFixedItemWidth = MiscUtils.dpToPixel(mContext, 168);
+        mTwoDp = ViewUtils.dpToPx(2);
+        mMaxFixedItemWidth = ViewUtils.dpToPx(168);
 
         initializeViews();
     }
@@ -227,11 +228,8 @@ public class BottomBar extends FrameLayout implements View.OnClickListener {
             index++;
         }
 
-        int screenWidth = MiscUtils.getScreenWidth(mContext);
-        int proposedItemWidth = Math.min(
-                MiscUtils.dpToPixel(mContext, screenWidth / bottomBarItems.length),
-                mMaxFixedItemWidth
-        );
+        int screenWidth = ViewUtils.getScreenWidth(mContext);
+        int proposedItemWidth = Math.min(ViewUtils.dpToPx(screenWidth / bottomBarItems.length), mMaxFixedItemWidth);
 
         LinearLayout.LayoutParams params = new LinearLayout
                 .LayoutParams(proposedItemWidth, LinearLayout.LayoutParams.WRAP_CONTENT);

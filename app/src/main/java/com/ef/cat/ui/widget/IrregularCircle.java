@@ -54,8 +54,8 @@ public class IrregularCircle extends TextView {
 
     @Override
     public void onDraw(Canvas canvas) {
-        canvas.drawCircle(getWidth()/2, getHeight()/2, Math.max(getWidth(), getHeight())/2, mBgPaint);
-        canvas.drawRect(getWidth()/2, getHeight()/2, getWidth(), getHeight(), mBgPaint);
+        canvas.drawCircle(getWidth() / 2, getHeight() / 2, Math.max(getWidth(), getHeight()) / 2, mBgPaint);
+        canvas.drawRect(getWidth() / 2, getHeight() / 2, getWidth(), getHeight(), mBgPaint);
         super.onDraw(canvas);
     }
 }

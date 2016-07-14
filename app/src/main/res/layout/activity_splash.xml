@@ -2,12 +2,11 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:rsv="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/darker_gray"
-    android:orientation="vertical"
     android:fitsSystemWindows="true"
+    android:orientation="vertical"
     tools:context="com.ef.cat.ui.activity.SplashActivity">
 
     <Button
@@ -17,53 +16,51 @@
         android:text="Button"/>
 
     <!--<com.ef.cat.ui.widget.DiscreteSlider-->
-        <!--android:id="@+id/rsv_small"-->
-        <!--android:layout_marginTop="50dp"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--rsv:filledColor="#1A5F77"-->
-        <!--/>-->
-
+    <!--android:id="@+id/rsv_small"-->
+    <!--android:layout_marginTop="50dp"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--rsv:filledColor="#1A5F77"-->
+    <!--/>-->
 
 
     <com.ef.cat.ui.widget.TitledInput
         android:id="@+id/rsv_small"
-        android:layout_marginTop="50dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-    />
+        />
 
     <LinearLayout
         android:id="@+id/splash_bottom_bar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:orientation="horizontal"
         android:layout_alignParentBottom="true"
         android:background="@color/tranBlack"
+        android:orientation="horizontal"
         android:visibility="invisible">
 
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
             android:text="Create Account"
-            android:textColor="@android:color/white"
-            android:gravity="center"/>
+            android:textColor="@android:color/white"/>
 
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:background="@android:color/white"
+            android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"/>
-        
+            android:background="@android:color/white"/>
+
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
             android:text="Find an EF Center"
-            android:textColor="@android:color/white"
-            android:gravity="center"/>
+            android:textColor="@android:color/white"/>
 
     </LinearLayout>
 

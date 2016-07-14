@@ -9,7 +9,7 @@ public class Constant {
     public static final String RESOURCE_ZIP_FILE_NAME = "resource.zip";
     public static final String RESOURCE_FOLDER_NAME = "resource";
     public static final String RESOURCE_FOLDER = APP_FOLDER + File.separator + "resource";
-    public static final String SYSTEM_TEXT_FOLDER = RESOURCE_FOLDER + File.separator +"system_text";
+    public static final String SYSTEM_TEXT_FOLDER = RESOURCE_FOLDER + File.separator + "system_text";
     public static final String MAPPING_FILE = "language_mapping.json";
 
 

@@ -12,20 +12,18 @@ import com.ef.cat.R;
 import com.ef.cat.injector.components.DaggerInitializationComponent;
 import com.ef.cat.injector.components.InitializationComponent;
 import com.ef.cat.presenter.SplashPresenter;
-import com.ef.cat.utils.SystemText;
 import com.ef.cat.view.SplashView;
 import com.ran.delta.presentation.ui.activity.MvpActivity;
-
-import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
 public class SplashActivity extends MvpActivity<SplashView, SplashPresenter> implements SplashView {
 
-    @BindView(R.id.splash_bottom_bar)   LinearLayout bottomBar;
+    @BindView(R.id.splash_bottom_bar)
+    LinearLayout bottomBar;
 
-    @Inject SystemText systemText;
+    //    @Inject SystemText systemText;
     private InitializationComponent initComponent;
 
     @Override

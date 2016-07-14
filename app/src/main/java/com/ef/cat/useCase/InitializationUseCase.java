@@ -4,7 +4,7 @@ import com.ef.cat.data.model.News;
 import com.ef.cat.data.repostory.CatRepository;
 import com.ran.delta.domain.annotation.UseCaseFunction;
 import com.ran.delta.domain.usecase.UseCase;
-import com.ran.delta.utils.MiscUtils;
+import com.ran.delta.utils.FileUtils;
 
 import javax.inject.Inject;
 
@@ -32,7 +32,7 @@ public class InitializationUseCase extends UseCase {
             @Override
             public void call(Subscriber<? super Boolean> subscriber) {
                 try {
-                    MiscUtils.unzip(targetDirectory, zipFile);
+                    FileUtils.unzip(targetDirectory, zipFile);
                     subscriber.onNext(true);
                     subscriber.onCompleted();
                 } catch (Exception e) {

@@ -1,15 +1,12 @@
 package com.ef.cat.ui.widget;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.ShapeDrawable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.LinearLayout;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.ef.cat.R;
@@ -17,7 +14,7 @@ import com.ef.cat.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class TitledInput extends LinearLayout {
+public class TitledInput extends FrameLayout {
 
     @BindView(R.id.titled_input_title)    TextView title;
     @BindView(R.id.titled_input_input)    EditText input;
@@ -42,21 +39,25 @@ public class TitledInput extends LinearLayout {
     }
 
     public void init() {
-//        title.setText(str);
-//        input.setHint(hint);
-
-
-        GradientDrawable titleBG = new GradientDrawable ();
-        GradientDrawable inputBG = new GradientDrawable ();
+        GradientDrawable titleBG = new GradientDrawable();
+        GradientDrawable inputBG = new GradientDrawable();
 
         titleBG.setColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
-        inputBG.setColor(ContextCompat.getColor(getContext(), R.color.colorAccent));
-        titleBG.setCornerRadii( new float[]{24, 24, 0, 0, 0, 0, 24, 24});
-        inputBG.setCornerRadii( new float[]{0, 0, 24, 24, 24, 24, 0, 0});
+        inputBG.setColor(ContextCompat.getColor(getContext(), R.color.white));
+        titleBG.setCornerRadii(new float[]{24, 24, 0, 0, 0, 0, 24, 24});
+        inputBG.setCornerRadii(new float[]{0, 0, 24, 24, 24, 24, 0, 0});
 
         title.setBackground(titleBG);
         input.setBackground(inputBG);
     }
 
+    public TitledInput setHint(String hint) {
+        input.setHint(hint);
+        return this;
+    }
 
+    public TitledInput setTitle(String str) {
+        title.setText(str);
+        return this;
+    }
 }

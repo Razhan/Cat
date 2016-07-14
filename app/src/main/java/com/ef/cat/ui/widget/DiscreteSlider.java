@@ -6,7 +6,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -14,7 +13,7 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 
 import com.ef.cat.R;
-import com.ran.delta.utils.MiscUtils;
+import com.ran.delta.utils.ViewUtils;
 
 public class DiscreteSlider extends View {
 
@@ -114,7 +113,7 @@ public class DiscreteSlider extends View {
         int y = getPaddingTop() + h / 2;
         selectedSlotY = y;
 
-        int x = getPaddingLeft() + (int)sliderRadius;
+        int x = getPaddingLeft() + (int) sliderRadius;
 
         for (int i = 0; i < rangeCount; ++i) {
             slotPositions[i] = x;
@@ -139,7 +138,7 @@ public class DiscreteSlider extends View {
         if (specMode == MeasureSpec.EXACTLY) {
             result = specSize;
         } else {
-            result = MiscUtils.dpToPixel(getContext(), DEFAULT_HEIGHT_IN_DP) + getPaddingTop() + getPaddingBottom();
+            result = ViewUtils.dpToPx(DEFAULT_HEIGHT_IN_DP) + getPaddingTop() + getPaddingBottom();
             result = Math.min(result, specSize);
         }
         return result;
@@ -259,7 +258,7 @@ public class DiscreteSlider extends View {
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         int h = getHeightWithoutPadding();
-        int x0 = getPaddingLeft() + (int)sliderRadius;
+        int x0 = getPaddingLeft() + (int) sliderRadius;
         int y0 = getPaddingTop() + (h / 2);
         drawEmptySlots(canvas);
         drawFilledSlots(canvas);
@@ -282,8 +281,7 @@ public class DiscreteSlider extends View {
 
     @Override
     public void onRestoreInstanceState(Parcelable state) {
-        if (state instanceof Bundle)
-        {
+        if (state instanceof Bundle) {
             Bundle bundle = (Bundle) state;
             this.currentIndex = bundle.getInt(SAVED_STATE);
             state = bundle.getParcelable("superState");

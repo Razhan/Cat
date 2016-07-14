@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.util.SparseArrayCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.util.Linkify;
@@ -103,7 +104,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
 
     public ViewHolder setTextColorRes(int viewId, int textColorRes) {
         TextView view = getView(viewId);
-        view.setTextColor(mContext.getResources().getColor(textColorRes));
+        view.setTextColor(ContextCompat.getColor(mContext, textColorRes));
         return this;
     }
 
@@ -112,7 +113,6 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             getView(viewId).setAlpha(value);
         } else {
-            // Pre-honeycomb hack to set Alpha value
             AlphaAnimation alpha = new AlphaAnimation(value, value);
             alpha.setDuration(0);
             alpha.setFillAfter(true);

@@ -10,9 +10,9 @@ import android.view.View;
 
 import com.ran.delta.R;
 
-final public class LceAnimator {
+final public class LceUtils {
 
-    private LceAnimator() {
+    private LceUtils() {
     }
 
     public static void showLoading(@NonNull View loadingView, @NonNull View contentView,
