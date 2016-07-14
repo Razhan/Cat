@@ -55,11 +55,11 @@ public class TransmutableView extends View {
     public TransmutableView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        TypedArray type = context.obtainStyledAttributes(attrs, R.styleable.transmutableview, 0, 0);
-        mTitleText = type.getString(R.styleable.transmutableview_text);
-        mTitleTextSize = type.getDimensionPixelSize(R.styleable.transmutableview_text_size, (int) TypedValue.applyDimension(
+        TypedArray type = context.obtainStyledAttributes(attrs, R.styleable.transmutable_view, 0, 0);
+        mTitleText = type.getString(R.styleable.transmutable_view_text);
+        mTitleTextSize = type.getDimensionPixelSize(R.styleable.transmutable_view_text_size, (int) TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_SP, 10, getResources().getDisplayMetrics()));
-        mTitleTextColor = type.getColor(R.styleable.transmutableview_text_color, Color.WHITE);
+        mTitleTextColor = type.getColor(R.styleable.transmutable_view_text_color, Color.WHITE);
         type.recycle();
 
         init();
