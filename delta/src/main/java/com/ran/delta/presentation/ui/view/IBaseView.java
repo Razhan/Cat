@@ -14,9 +14,9 @@ public interface IBaseView {
 
     void hideProgress();
 
-    void showToast(int resId);
+    void showMessage(int resId);
 
-    void showToast(String msg);
+    void showMessage(String msg);
 
     Context getContext();
 }

@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.CallSuper;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.WindowManager;
@@ -200,14 +201,16 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
     }
 
     @Override
-    public void showToast(int resId) {
-        showToast(getString(resId));
+    public void showMessage(int resId) {
+        showMessage(getString(resId));
     }
 
     @Override
-    public void showToast(String msg) {
+    public void showMessage(String msg) {
         if (!isFinishing()) {
-            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+            Snackbar.make(getWindow().getDecorView().findViewById(android.R.id.content), msg,
+                    Snackbar.LENGTH_SHORT).show();
         }
     }
 

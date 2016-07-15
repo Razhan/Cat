@@ -80,21 +80,21 @@ public abstract class BaseFragment extends Fragment implements IBaseView {
     }
 
     @Override
-    public void showToast(int resId) {
+    public void showMessage(int resId) {
         if (getStatus()) {
             BaseActivity activity = getBaseActivity();
             if (activity != null) {
-                activity.showToast(resId);
+                activity.showMessage(resId);
             }
         }
     }
 
     @Override
-    public void showToast(String msg) {
+    public void showMessage(String msg) {
         if (getStatus()) {
             BaseActivity activity = getBaseActivity();
             if (activity != null) {
-                activity.showToast(msg);
+                activity.showMessage(msg);
             }
         }
     }

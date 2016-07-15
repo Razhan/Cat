@@ -80,7 +80,7 @@ public abstract class MvpLceActivity<CV extends View, M, V extends MvpLceView<M>
         String errorMsg = getErrorMessage(e);
 
         if (pullToRefresh) {
-            showToast(errorMsg);
+            showMessage(errorMsg);
         } else {
             errorView.setText(errorMsg);
             animateErrorViewIn();
