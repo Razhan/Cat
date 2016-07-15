@@ -15,6 +15,8 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
@@ -177,6 +179,61 @@ public final class FileUtils {
         }
 
         return fileContentBuilder.toString();
+    }
+
+    public static void CopyAssets(Context context, String assetDir,String dir) {
+        String[] files;
+        try {
+            files = context.getResources().getAssets().list(assetDir);
+        } catch (IOException e1) {
+            return;
+        }
+        File mWorkingPath = new File(dir);
+        if (!mWorkingPath.exists()) {
+            if (!mWorkingPath.mkdirs()) {
+                return;
+            }
+        }
+
+        for (int i = 0; i < files.length; i++) {
+            try {
+                String fileName = files[i];
+                if (!fileName.contains(".")) {
+                    if (0 == assetDir.length()) {
+                        CopyAssets(context, fileName, dir + fileName + File.separator);
+                    } else {
+                        CopyAssets(context, assetDir + File.separator + fileName, dir + fileName + File.separator);
+                    }
+                    continue;
+                }
+
+                File outFile = new File(mWorkingPath, fileName);
+                if (outFile.exists()) {
+                    outFile.delete();
+                }
+
+                InputStream in;
+                if (0 != assetDir.length()) {
+                    in = context.getAssets().open(assetDir + File.separator + fileName);
+                } else {
+                    in = context.getAssets().open(fileName);
+                }
+                OutputStream out = new FileOutputStream(outFile);
+
+                byte[] buf = new byte[1024];
+                int len;
+                while ((len = in.read(buf)) > 0) {
+                    out.write(buf, 0, len);
+                }
+
+                in.close();
+                out.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }

@@ -16,6 +16,8 @@ import butterknife.ButterKnife;
 
 public class TitledInput extends FrameLayout {
 
+    private int cornerRadius = 15;
+
     @BindView(R.id.titled_input_title)    TextView title;
     @BindView(R.id.titled_input_input)    EditText input;
 
@@ -44,11 +46,15 @@ public class TitledInput extends FrameLayout {
 
         titleBG.setColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
         inputBG.setColor(ContextCompat.getColor(getContext(), R.color.white));
-        titleBG.setCornerRadii(new float[]{24, 24, 0, 0, 0, 0, 24, 24});
-        inputBG.setCornerRadii(new float[]{0, 0, 24, 24, 24, 24, 0, 0});
+        titleBG.setCornerRadii(new float[]{cornerRadius, cornerRadius, 0, 0, 0, 0, cornerRadius, cornerRadius});
+        inputBG.setCornerRadii(new float[]{0, 0, cornerRadius, cornerRadius, cornerRadius, cornerRadius, 0, 0});
 
         title.setBackground(titleBG);
         input.setBackground(inputBG);
+    }
+
+    public void setCornerRadius(int cornerRadius) {
+        this.cornerRadius = cornerRadius;
     }
 
     public TitledInput setHint(String hint) {
